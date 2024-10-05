@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -13,9 +14,16 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Mixer")]
     [SerializeField] private AudioMixer audioMixer;
 
+    [Header("Volume Sliders")]
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider UIVolumeSlider;
+    [SerializeField] private Slider soundFXVolumeSlider;
+
     private string masterVolumeParameter = "MasterVolume";
     private string musicVolumeParameter = "MusicVolume";
     private string uiInteractionVolumeParameter = "UIVolume";
+    private string soundFXVolumeParameter = "SoundFXVolume";
 
     //------------------//
     private void Awake()
@@ -30,6 +38,15 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
+        UIVolumeSlider.onValueChanged.AddListener(SetUIInteractionVolume);
+        soundFXVolumeSlider.onValueChanged.AddListener(SetSoundFXVolume);
+
     }
 
     //--------------------------------------------------------------------------------------//
@@ -76,5 +93,12 @@ public class SoundManager : MonoBehaviour
     //---------------------------------------------//
     {
         audioMixer.SetFloat(uiInteractionVolumeParameter, Mathf.Log10(level) * 20f);
+    }
+
+    //---------------------------------------//
+    public void SetSoundFXVolume(float level)
+    //---------------------------------------//
+    {
+        audioMixer.SetFloat(soundFXVolumeParameter, Mathf.Log10(level) * 20f);
     }
 }

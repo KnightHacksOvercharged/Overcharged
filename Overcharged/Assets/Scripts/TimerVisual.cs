@@ -6,22 +6,32 @@ using TMPro;
 public class TimerVisual : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private float remainingTime;
 
     private void Awake()
     {
         timerText = this.GetComponent<TextMeshProUGUI>();
     }
 
+    private void Start()
+    {
+        remainingTime = GameManager.Instance.CountdownTimerValue();
+    }
+
     private void Update()
     {
-        if (GameManager.Instance.remainingTime <= 0)
+        if (remainingTime <= 0)
         {
-            GameManager.Instance.remainingTime = 0;
-            // GameOver();
+            remainingTime = 0;
         }
         else
         {
-            GameManager.Instance.remainingTime -= Time.deltaTime;
+            remainingTime -= Time.deltaTime;
         }
+
+        int minutes = Mathf.FloorToInt(remainingTime / 60);
+        int seconds = Mathf.FloorToInt(remainingTime % 60);
+
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
