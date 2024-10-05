@@ -43,7 +43,7 @@ public class LeaderboardDisplay : MonoBehaviour
             GameObject scoreObject = new("BestScore");
             scoreObject.transform.SetParent(textObject.transform);
             TextMeshProUGUI scoreText = scoreObject.AddComponent<TextMeshProUGUI>();
-            scoreText.text = BestScore.ToString();
+            scoreText.text = "$" + BestScore.ToString();
             scoreText.fontSize = 60;
             scoreText.color = Color.black;
             scoreText.alignment = TextAlignmentOptions.Right;
