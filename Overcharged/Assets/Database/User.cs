@@ -12,10 +12,10 @@ namespace Assets.Database
         [BsonElement("displayName")]
         public string DisplayName { get; set; }
 
-        [BsonElement("email")]
-        public string Email { get; set; }
-
         [BsonElement("password")]
         public string Password { get; set; }
+
+        [BsonElement("bestScore")]
+        public int BestScore { get; set; }
     }
 }
