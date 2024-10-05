@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Database;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,24 +9,46 @@ public class LeaderboardDisplay : MonoBehaviour
     {
         var scores = await Database.GetDisplayNamesAndScoresAsync();
 
-        foreach(var (DisplayName, BestScore) in scores)
+        for (int i = 0; i < scores.Count; i++)
         {
-            GameObject textObject = new GameObject("LeaderboardEntry");
-            TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
-            textObject.transform.SetParent(transform);
-            textComponent.text = $"{DisplayName}: {BestScore}";
-            textComponent.color = Color.black;
-            textComponent.fontSize = 60;
-            textComponent.font = Resources.GetBuiltinResource<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF.asset");
-            // GameObject textObject = new GameObject();
-            // TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
-            // textObject.transform.SetParent(transform);
+            var (DisplayName, BestScore) = scores[i];
 
-            // Text textComponent = textObject.AddComponent<Text>();
-            // textComponent.text = $"{DisplayName}: {BestScore}";
-            // textComponent.color = Color.black;
-            // textComponent.fontSize = 60;
-            // textComponent.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            GameObject textObject = new("LeaderboardEntry");
+            textObject.transform.SetParent(transform);
+
+            HorizontalLayoutGroup layoutGroup = textObject.AddComponent<HorizontalLayoutGroup>();
+            layoutGroup.childAlignment = TextAnchor.MiddleCenter;
+            layoutGroup.childForceExpandWidth = true;
+            layoutGroup.padding = new RectOffset(50, 50, 0, 0);
+
+            RectTransform rectTransform = textObject.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(1200, rectTransform.sizeDelta.y);
+     
+            GameObject rankObject = new("Rank");
+            rankObject.transform.SetParent(textObject.transform);
+            TextMeshProUGUI rankText = rankObject.AddComponent<TextMeshProUGUI>();
+            rankText.text = "" + (i + 1);
+            rankText.fontSize = 60;
+            rankText.color = Color.black;
+            rankText.alignment = TextAlignmentOptions.Left;
+        
+            GameObject nameObject = new("DisplayName");
+            nameObject.transform.SetParent(textObject.transform);
+            TextMeshProUGUI nameText = nameObject.AddComponent<TextMeshProUGUI>();
+            nameText.text = DisplayName;
+            nameText.fontSize = 60;
+            nameText.color = Color.black;
+            nameText.alignment = TextAlignmentOptions.Center;
+        
+            GameObject scoreObject = new("BestScore");
+            scoreObject.transform.SetParent(textObject.transform);
+            TextMeshProUGUI scoreText = scoreObject.AddComponent<TextMeshProUGUI>();
+            scoreText.text = BestScore.ToString();
+            scoreText.fontSize = 60;
+            scoreText.color = Color.black;
+            scoreText.alignment = TextAlignmentOptions.Right;
         }
     }
+
+    
 }
