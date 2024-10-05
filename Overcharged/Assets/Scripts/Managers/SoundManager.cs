@@ -42,10 +42,11 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
-        UIVolumeSlider.onValueChanged.AddListener(SetUIInteractionVolume);
-        soundFXVolumeSlider.onValueChanged.AddListener(SetSoundFXVolume);
+
+        masterVolumeSlider?.onValueChanged.AddListener(SetMasterVolume);
+        musicVolumeSlider?.onValueChanged.AddListener(SetMusicVolume);
+        UIVolumeSlider?.onValueChanged.AddListener(SetUIInteractionVolume);
+        soundFXVolumeSlider?.onValueChanged.AddListener(SetSoundFXVolume);
 
     }
 
