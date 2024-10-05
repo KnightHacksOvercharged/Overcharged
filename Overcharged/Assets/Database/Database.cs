@@ -19,7 +19,8 @@ namespace Assets.Database
             var user = new User
             {
                 DisplayName = displayName,
-                Password = password
+                Password = password,
+                BestScore = -1,
             };
 
             var existingDisplayNameUser = await collection.Find(u => u.DisplayName == displayName).FirstOrDefaultAsync() ?? throw new InvalidOperationException("A user with the same display name already exists.");
