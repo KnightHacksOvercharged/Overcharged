@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 42252577}
   - component: {fileID: 42252578}
   m_Layer: 5
-  m_Name: Sound fx
+  m_Name: SoundFXVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2137,7 +2137,7 @@ GameObject:
   - component: {fileID: 1022149309}
   - component: {fileID: 1022149310}
   m_Layer: 5
-  m_Name: Music Slider
+  m_Name: MusicVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2396,7 +2396,7 @@ GameObject:
   - component: {fileID: 1155668740}
   - component: {fileID: 1155668741}
   m_Layer: 5
-  m_Name: UI VOLUME
+  m_Name: UIVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3456,7 +3456,7 @@ GameObject:
   - component: {fileID: 1742196791}
   - component: {fileID: 1742196792}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: MasterVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3705,6 +3705,87 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1889621116
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45293227847772137, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260597696229837810, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556718697773517660, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 42c3e9184e16b794fab4f7e92d3355dd, type: 2}
+    - target: {fileID: 6556718697773517660, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: soundFXPrefab
+      value: 
+      objectReference: {fileID: 7781150920128763647, guid: d4e5e04bc8e3a2744b1bfb2f4dc6e2f0, type: 3}
+    - target: {fileID: 6556718697773517660, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: UIVolumeSlider
+      value: 
+      objectReference: {fileID: 1155668741}
+    - target: {fileID: 6556718697773517660, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: musicVolumeSlider
+      value: 
+      objectReference: {fileID: 1022149310}
+    - target: {fileID: 6556718697773517660, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: masterVolumeSlider
+      value: 
+      objectReference: {fileID: 1742196792}
+    - target: {fileID: 6556718697773517660, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
+      propertyPath: soundFXVolumeSlider
+      value: 
+      objectReference: {fileID: 42252578}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f982f7def9806ac4494f64fc3beb6588, type: 3}
 --- !u!1 &1997627385
 GameObject:
   m_ObjectHideFlags: 0
@@ -4239,3 +4320,4 @@ SceneRoots:
   - {fileID: 1079398207}
   - {fileID: 1221203125}
   - {fileID: 349823198}
+  - {fileID: 1889621116}
