@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<IInteractable> interactableObjects = new List<IInteractable>();
 
     [Header("Time")]
-    public float remainingTime;
+    [SerializeField] private float startGameDelay;
+    [SerializeField] private float countdownTimer;
+    [Space]
     [SerializeField] private float minTimeToTurnOn;
     [SerializeField] private float maxTimeToTurnOn;
 
@@ -41,10 +43,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator IStartGame()
     {
-        yield return new WaitForSeconds(remainingTime);
+        yield return new WaitForSeconds(startGameDelay);
 
+        GameOver();
+    }
+
+    public void GameOver()
+    {
         StopAllCoroutines();
-
         Debug.Log("END GAME");
     }
 
@@ -73,5 +79,10 @@ public class GameManager : MonoBehaviour
 
             interactableObjects[randomIndex].Activate();
         }
+    }
+
+    public float CountdownTimerValue()
+    {
+        return countdownTimer;
     }
 }
