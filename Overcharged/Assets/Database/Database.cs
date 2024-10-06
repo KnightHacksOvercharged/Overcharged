@@ -14,23 +14,32 @@ namespace Assets.Database
 
         private static readonly IMongoCollection<User> collection = database.GetCollection<User>("Users");
 
-        public static async void SignUp(string displayName, string email, string password)
+        public static async Task<User> SignUp(string displayName, string password)
         {
             var user = new User
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 DisplayName = displayName,
                 Password = password,
                 BestScore = -1,
             };
 
-            var existingDisplayNameUser = await collection.Find(u => u.DisplayName == displayName).FirstOrDefaultAsync() ?? throw new InvalidOperationException("A user with the same display name already exists.");
+            var existingDisplayNameUser = await collection.Find(u => u.DisplayName == displayName).FirstOrDefaultAsync();
+
+            if(existingDisplayNameUser != null)
+                throw new InvalidOperationException("Display name already taken.");
 
             await collection.InsertOneAsync(user);
+            return user;
         }
 
         public static async Task<User> SignIn(string displayName, string password)
         {
-            var user = await collection.Find(u => u.DisplayName == displayName && u.Password == password).FirstOrDefaultAsync();
+            var user = await collection.Find(u => u.DisplayName == displayName).FirstOrDefaultAsync();
+
+            if (user == null || user.Password != password)
+                throw new InvalidOperationException("Invalid username or password.");
+
             return user;
         }
 
