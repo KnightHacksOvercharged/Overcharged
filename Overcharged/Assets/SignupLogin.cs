@@ -2,6 +2,7 @@ using Assets.Database;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SignupLogin : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class SignupLogin : MonoBehaviour
     public TMP_InputField signupPasswordInput;
     public Button signupButton;
     public TMP_Text signupErrorText;
+
+    public string sceneNameToLoad;
     
 
     public void Start()
@@ -39,7 +42,7 @@ public class SignupLogin : MonoBehaviour
         try
         {
             var user = await Database.SignIn(username, password);
-            Debug.Log(user.DisplayName + " " + user.Id);
+            SceneManager.LoadScene(sceneNameToLoad);
         } catch(System.Exception e)
         {
             loginErrorText.text = e.Message;
@@ -51,17 +54,15 @@ public class SignupLogin : MonoBehaviour
         string username = signupUsernameInput.text;
         string password = signupPasswordInput.text;
 
-        Debug.Log("here");
         if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
             signupErrorText.text = "Username and password cannot be empty.";
             return;
         }
-        Debug.Log("here2");
         try
         {
             var user = await Database.SignUp(username, password);
-            Debug.Log(user.DisplayName + " " + user.Id);
+            SceneManager.LoadScene(sceneNameToLoad);
         } catch(System.Exception e)
         {
             signupErrorText.text = e.Message;
