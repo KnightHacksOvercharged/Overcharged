@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Score")]
     public float electricityBillTotal = 0f;
+    [SerializeField] private TextMeshProUGUI electricityBillText;
 
     [Header("All Interactables")]
-    [SerializeField] private List<IInteractable> interactableObjects = new List<IInteractable>();
+    [SerializeField] private List<GameObject> interactableObjects = new List<GameObject>();
+    private List<IInteractable> interactables = new List<IInteractable>();
 
     [Header("Time")]
     [SerializeField] private float startGameDelay;
@@ -37,13 +40,27 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
         StartCoroutine(IStartGame());
         StartCoroutine(ITurnOnItems());
     }
 
+    private void Initialize()
+    {
+        foreach (GameObject interactableObject in interactableObjects)
+        {
+            IInteractable interactable = interactableObject.GetComponent<IInteractable>();
+
+            if (interactable != null)
+            {
+                interactables.Add(interactableObject.GetComponent<IInteractable>());
+            }
+        }
+    }
+
     private IEnumerator IStartGame()
     {
-        yield return new WaitForSeconds(startGameDelay);
+        yield return new WaitForSeconds(countdownTimer);
 
         GameOver();
     }
@@ -51,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         StopAllCoroutines();
+        DeactivateAllItems();
         Debug.Log("END GAME");
     }
 
@@ -77,12 +95,29 @@ public class GameManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, interactableObjects.Count);
 
-            interactableObjects[randomIndex].Activate();
+            if (!interactableObjects[randomIndex].GetComponent<InteractionHandler>().isActive)
+            {
+                interactables[randomIndex].Activate();
+            }
         }
     }
 
-    public float CountdownTimerValue()
+    private void DeactivateAllItems()
+    {
+        foreach (IInteractable interactable in interactables)
+        {
+            interactable.Deactivate();
+        }
+    }
+
+    public float GetCountdownTimerValue()
     {
         return countdownTimer;
+    }
+
+    public void AddToScore(int amount)
+    {
+        GameManager.Instance.electricityBillTotal += amount;
+        GameManager.Instance.electricityBillText.text = string.Format("{0:C2}", GameManager.Instance.electricityBillTotal);
     }
 }
