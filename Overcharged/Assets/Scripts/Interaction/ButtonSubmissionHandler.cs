@@ -5,16 +5,13 @@ using UnityEngine;
 public class ButtonSubmissionHandler : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] private AudioClip buttonClick;
+    [SerializeField]
+    [Range(0, 1f)] private float volume;
 
-    
-    void Start()
+    public void HandleButtonSubmission()
     {
-        
-    }
+        SoundManager.Instance.PlayUIInteractionClip(buttonClick, this.transform, volume);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
