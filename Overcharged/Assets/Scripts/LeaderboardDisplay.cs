@@ -19,16 +19,16 @@ public class LeaderboardDisplay : MonoBehaviour
             HorizontalLayoutGroup layoutGroup = textObject.AddComponent<HorizontalLayoutGroup>();
             layoutGroup.childAlignment = TextAnchor.MiddleCenter;
             layoutGroup.childForceExpandWidth = true;
-            layoutGroup.padding = new RectOffset(30, 30, 0, 0);
+            layoutGroup.padding = new RectOffset(50, 50, 0, 0);
 
             RectTransform rectTransform = textObject.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(750, rectTransform.sizeDelta.y);
+            rectTransform.sizeDelta = new Vector2(1200, rectTransform.sizeDelta.y);
      
             GameObject rankObject = new("Rank");
             rankObject.transform.SetParent(textObject.transform);
             TextMeshProUGUI rankText = rankObject.AddComponent<TextMeshProUGUI>();
             rankText.text = "" + (i + 1);
-            rankText.fontSize = 45;
+            rankText.fontSize = 60;
             rankText.color = Color.black;
             rankText.alignment = TextAlignmentOptions.Left;
         
@@ -36,7 +36,7 @@ public class LeaderboardDisplay : MonoBehaviour
             nameObject.transform.SetParent(textObject.transform);
             TextMeshProUGUI nameText = nameObject.AddComponent<TextMeshProUGUI>();
             nameText.text = DisplayName;
-            nameText.fontSize = 45;
+            nameText.fontSize = 60;
             nameText.color = Color.black;
             nameText.alignment = TextAlignmentOptions.Center;
         
@@ -44,7 +44,7 @@ public class LeaderboardDisplay : MonoBehaviour
             scoreObject.transform.SetParent(textObject.transform);
             TextMeshProUGUI scoreText = scoreObject.AddComponent<TextMeshProUGUI>();
             scoreText.text = "$" + BestScore.ToString();
-            scoreText.fontSize = 45;
+            scoreText.fontSize = 60;
             scoreText.color = Color.black;
             scoreText.alignment = TextAlignmentOptions.Right;
         }
