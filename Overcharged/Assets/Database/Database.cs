@@ -14,6 +14,8 @@ namespace Assets.Database
 
         private static readonly IMongoCollection<User> collection = database.GetCollection<User>("Users");
 
+        public static User CurrentUser { get; private set; }
+
         public static async Task<User> SignUp(string displayName, string password)
         {
             var user = new User
@@ -30,6 +32,9 @@ namespace Assets.Database
                 throw new InvalidOperationException("Display name already taken.");
 
             await collection.InsertOneAsync(user);
+
+            CurrentUser = user;
+
             return user;
         }
 
@@ -40,12 +45,14 @@ namespace Assets.Database
             if (user == null || user.Password != password)
                 throw new InvalidOperationException("Invalid username or password.");
 
-            return user;
+            CurrentUser = user;
+
+            return user; 
         }
 
-        public static async void UpdateBestScore(string userId, int bestScore)
+        public static async void UpdateBestScore(int bestScore)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Id, userId);
+            var filter = Builders<User>.Filter.Eq(u => u.Id, CurrentUser.Id);
             var user = await collection.Find(filter).FirstOrDefaultAsync() ?? throw new InvalidOperationException("User not found.");
             var update = Builders<User>.Update.Set(u => u.BestScore, user.BestScore == -1 ? bestScore : Math.Min(user.BestScore, bestScore));
 
