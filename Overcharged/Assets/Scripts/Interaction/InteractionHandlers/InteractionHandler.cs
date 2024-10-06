@@ -9,6 +9,7 @@ public abstract class InteractionHandler : MonoBehaviour
 
     [Header("Energy Data")]
     [SerializeField] protected float electricityRate;
+    [SerializeField] protected int electricityAmountPerTime;
 
     [Header("Audio")]
     [SerializeField] protected AudioClip interactionAudioClip;
@@ -17,11 +18,10 @@ public abstract class InteractionHandler : MonoBehaviour
     [Range(0, 1f)] protected float volume;
     
     [Header("Animation")]
-    [SerializeField] protected string animationTriggerParameter;
     [SerializeField] protected bool isAnimating = false;
     protected Animator animator;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         animator = this.GetComponent<Animator>();
     }
@@ -29,5 +29,19 @@ public abstract class InteractionHandler : MonoBehaviour
     public void OnAnimationEnd()
     {
         isAnimating = false;
+    }
+
+    protected void PlayAnimation(string parameter)
+    {
+        isAnimating = true;
+        animator.SetTrigger(parameter);
+    }
+
+    protected void PlayInteractionSound()
+    {
+        if (interactionAudioClip != null)
+        {
+            SoundManager.Instance.PlaySoundFXClip(interactionAudioClip, this.transform, volume);
+        }
     }
 }

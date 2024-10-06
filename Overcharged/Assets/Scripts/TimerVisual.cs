@@ -15,7 +15,7 @@ public class TimerVisual : MonoBehaviour
 
     private void Start()
     {
-        remainingTime = GameManager.Instance.CountdownTimerValue();
+        remainingTime = GameManager.Instance.GetCountdownTimerValue();
     }
 
     private void Update()
