@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class LightSwitchInteractionHandler : InteractionHandler, IInteractable
 {
+    [Header("Attached Lights")]
+    [SerializeField] private List<Light> lights = new List<Light>();
+
+    [Header("Toggle Light Animation")]
+    [SerializeField] protected string animationTriggerParameter;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        ToggleLights();
+    }
+
     public void OnInteract()
     {
         if (isAnimating)
@@ -13,13 +25,13 @@ public class LightSwitchInteractionHandler : InteractionHandler, IInteractable
 
         if (isActive)
         {
-            PlayAnimation();
+            PlayAnimation(animationTriggerParameter);
             PlayInteractionSound();
             Deactivate();
         }
         else
         {
-            PlayAnimation();
+            PlayAnimation(animationTriggerParameter);
             PlayInteractionSound();
             Activate();
         }
@@ -28,27 +40,15 @@ public class LightSwitchInteractionHandler : InteractionHandler, IInteractable
     public void Activate()
     {
         isActive = true;
+        ToggleLights();
         StartCoroutine(IUseElectricity());
     }
 
     public void Deactivate()
     {
         isActive = false;
+        ToggleLights();
         StopAllCoroutines();
-    }
-
-    private void PlayAnimation()
-    {
-        isAnimating = true;
-        animator.SetTrigger(animationTriggerParameter);
-    }
-
-    private void PlayInteractionSound()
-    {
-        if (interactionAudioClip != null)
-        {
-            SoundManager.Instance.PlaySoundFXClip(interactionAudioClip, this.transform, volume);
-        }
     }
 
     private IEnumerator IUseElectricity()
@@ -58,5 +58,13 @@ public class LightSwitchInteractionHandler : InteractionHandler, IInteractable
         GameManager.Instance.AddToScore(electricityAmountPerTime);
 
         StartCoroutine(IUseElectricity());
+    }
+
+    private void ToggleLights()
+    {
+        foreach (Light light in lights)
+        {
+            light.enabled = isActive;
+        }
     }
 }

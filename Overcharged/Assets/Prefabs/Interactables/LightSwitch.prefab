@@ -95,8 +95,9 @@ MonoBehaviour:
   electricityAmountPerTime: 1
   interactionAudioClip: {fileID: 8300000, guid: ad8480ced1fdc084d9ae5e9858eab9ee, type: 3}
   volume: 1
-  animationTriggerParameter: Interact
   isAnimating: 0
+  lights: []
+  animationTriggerParameter: Interact
 --- !u!1001 &4023580152026679800
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -49,7 +49,12 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject interactableObject in interactableObjects)
         {
-            interactables.Add(interactableObject.GetComponent<IInteractable>());
+            IInteractable interactable = interactableObject.GetComponent<IInteractable>();
+
+            if (interactable != null)
+            {
+                interactables.Add(interactableObject.GetComponent<IInteractable>());
+            }
         }
     }
 
