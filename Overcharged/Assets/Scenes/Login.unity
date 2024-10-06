@@ -2093,6 +2093,7 @@ MonoBehaviour:
   signupPasswordInput: {fileID: 1452638463}
   signupButton: {fileID: 889468997}
   signupErrorText: {fileID: 1811932487}
+  sceneNameToLoad: StartMenu
 --- !u!4 &705486042
 Transform:
   m_ObjectHideFlags: 0
