@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: adc740038a8dc444990ee9399fe35003
+  - enabled: 1
+    path: Assets/Scenes/ChrisHouse.unity
+    guid: c96720c3bceb60c419b85318c1fb18d5
   m_configObjects: {}

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -10,13 +13,14 @@ public class GameManager : MonoBehaviour
     [Header("Score")]
     public float electricityBillTotal = 0f;
     [SerializeField] private TextMeshProUGUI electricityBillText;
+    [SerializeField] private CanvasGroup leaderboard;
 
     [Header("All Interactables")]
     [SerializeField] private List<GameObject> interactableObjects = new List<GameObject>();
     private List<IInteractable> interactables = new List<IInteractable>();
 
     [Header("Time")]
-    [SerializeField] private float startGameDelay;
+    [SerializeField] private float leaderboardAnimationTime;
     [SerializeField] private float countdownTimer;
     [Space]
     [SerializeField] private float minTimeToTurnOn;
@@ -43,6 +47,8 @@ public class GameManager : MonoBehaviour
         Initialize();
         StartCoroutine(IStartGame());
         StartCoroutine(ITurnOnItems());
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Initialize()
@@ -69,7 +75,19 @@ public class GameManager : MonoBehaviour
     {
         StopAllCoroutines();
         DeactivateAllItems();
-        Debug.Log("END GAME");
+        Cursor.lockState = CursorLockMode.None;
+        StartCoroutine(IDisplayLeaderboard());
+    }
+
+    private IEnumerator IDisplayLeaderboard()
+    {
+        Assets.Database.Database.UpdateBestScore((int)electricityBillTotal);
+        leaderboard.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(10);
+
+        Debug.Log("Loading Scene");
+        SceneManager.LoadScene("StartMenu");
     }
 
     private IEnumerator ITurnOnItems()
