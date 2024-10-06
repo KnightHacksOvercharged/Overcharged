@@ -9,6 +9,7 @@ public abstract class InteractionHandler : MonoBehaviour
 
     [Header("Energy Data")]
     [SerializeField] protected float electricityRate;
+    [SerializeField] protected int electricityAmountPerTime;
 
     [Header("Audio")]
     [SerializeField] protected AudioClip interactionAudioClip;

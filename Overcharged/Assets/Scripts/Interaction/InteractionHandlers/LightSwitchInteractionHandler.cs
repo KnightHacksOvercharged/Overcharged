@@ -11,24 +11,52 @@ public class LightSwitchInteractionHandler : InteractionHandler, IInteractable
             return;
         }
 
-        Activate();
+        if (isActive)
+        {
+            PlayAnimation();
+            PlayInteractionSound();
+            Deactivate();
+        }
+        else
+        {
+            PlayAnimation();
+            PlayInteractionSound();
+            Activate();
+        }
     }
 
     public void Activate()
     {
         isActive = true;
+        StartCoroutine(IUseElectricity());
+    }
 
+    public void Deactivate()
+    {
+        isActive = false;
+        StopAllCoroutines();
+    }
+
+    private void PlayAnimation()
+    {
         isAnimating = true;
         animator.SetTrigger(animationTriggerParameter);
+    }
 
+    private void PlayInteractionSound()
+    {
         if (interactionAudioClip != null)
         {
             SoundManager.Instance.PlaySoundFXClip(interactionAudioClip, this.transform, volume);
         }
     }
 
-    public void Deactivate()
+    private IEnumerator IUseElectricity()
     {
-        isActive = false;
+        yield return new WaitForSeconds(electricityRate);
+
+        GameManager.Instance.AddToScore(electricityAmountPerTime);
+
+        StartCoroutine(IUseElectricity());
     }
 }
