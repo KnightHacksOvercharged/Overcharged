@@ -8,8 +8,9 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    [Header("Sound FX Prefab")]
+    [Header("Sound Prefab")]
     [SerializeField] private AudioSource soundFXPrefab;
+    [SerializeField] private AudioSource uiSoundPrefab;
 
     [Header("Audio Mixer")]
     [SerializeField] private AudioMixer audioMixer;
@@ -55,6 +56,29 @@ public class SoundManager : MonoBehaviour
     {
         // Spawn game object
         AudioSource audioSource = Instantiate(soundFXPrefab, spawnTransform.position, Quaternion.identity);
+
+        // Assign audio clip
+        audioSource.clip = audioClip;
+
+        // Assign volume
+        audioSource.volume = volume;
+
+        // Play Sound
+        audioSource.Play();
+
+        // Get length of sound FX clip
+        float clipLength = audioSource.clip.length;
+
+        // Destroy clip after it is done playing
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
+    //--------------------------------------------------------------------------------------//
+    public void PlayUIInteractionClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    //--------------------------------------------------------------------------------------//
+    {
+        // Spawn game object
+        AudioSource audioSource = Instantiate(uiSoundPrefab, spawnTransform.position, Quaternion.identity);
 
         // Assign audio clip
         audioSource.clip = audioClip;

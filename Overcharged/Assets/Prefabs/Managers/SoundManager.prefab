@@ -44,5 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e7f3eb8dc6f2b46b4994741b3d9817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundFXPrefab: {fileID: 0}
-  audioMixer: {fileID: 0}
+  soundFXPrefab: {fileID: 7781150920128763647, guid: d4e5e04bc8e3a2744b1bfb2f4dc6e2f0, type: 3}
+  uiSoundPrefab: {fileID: 4625218169164751449, guid: 804b6725e9138934780b9f3061f0cefd, type: 3}
+  audioMixer: {fileID: 24100000, guid: 42c3e9184e16b794fab4f7e92d3355dd, type: 2}
+  masterVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  UIVolumeSlider: {fileID: 0}
+  soundFXVolumeSlider: {fileID: 0}
