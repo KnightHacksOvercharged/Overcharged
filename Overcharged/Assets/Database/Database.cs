@@ -52,11 +52,10 @@ namespace Assets.Database
 
         public static async void UpdateBestScore(int bestScore)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Id, CurrentUser.Id);
-            var user = await collection.Find(filter).FirstOrDefaultAsync() ?? throw new InvalidOperationException("User not found.");
-            var update = Builders<User>.Update.Set(u => u.BestScore, user.BestScore == -1 ? bestScore : Math.Min(user.BestScore, bestScore));
+            if(CurrentUser.BestScore == -1 || bestScore < CurrentUser.BestScore)
+                CurrentUser.BestScore = bestScore;
 
-            await collection.UpdateOneAsync(filter, update);
+            await collection.ReplaceOneAsync(u => u.Id == CurrentUser.Id, CurrentUser);
         }
 
         public static async Task<List<(string DisplayName, int BestScore)>> GetDisplayNamesAndScoresAsync()
