@@ -47,7 +47,6 @@ public class SoundManager : MonoBehaviour
         musicVolumeSlider?.onValueChanged.AddListener(SetMusicVolume);
         UIVolumeSlider?.onValueChanged.AddListener(SetUIInteractionVolume);
         soundFXVolumeSlider?.onValueChanged.AddListener(SetSoundFXVolume);
-
     }
 
     //--------------------------------------------------------------------------------------//
