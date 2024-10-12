@@ -7,7 +7,7 @@ public class LeaderboardDisplay : MonoBehaviour
 {
     [SerializeField] private RectTransform contentBox;
 
-    async void Start()
+    async void OnEnable()
     {
         var scores = await Database.GetDisplayNamesAndScoresAsync();
 
@@ -54,5 +54,11 @@ public class LeaderboardDisplay : MonoBehaviour
         RefreshUILayout.RefreshContentFitters(contentBox);
     }
 
-    
+    private void OnDisable()
+    {
+        foreach (Transform child in this.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

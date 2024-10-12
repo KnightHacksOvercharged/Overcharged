@@ -14549,7 +14549,7 @@ PrefabInstance:
       objectReference: {fileID: 376617149}
     - target: {fileID: 7888895659811646772, guid: 854d587bcc4b0644fb424aa642b60bfe, type: 3}
       propertyPath: countdownTimer
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7888895659811646772, guid: 854d587bcc4b0644fb424aa642b60bfe, type: 3}
       propertyPath: startGameDelay
