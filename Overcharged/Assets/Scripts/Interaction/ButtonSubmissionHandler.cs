@@ -28,7 +28,16 @@ public class ButtonSubmissionHandler : MonoBehaviour
 
         SoundManager.Instance.PlayUIInteractionClip(buttonClick, this.transform, volume);
 
+        if (currentMenu == null || menuToOpen == null)
+        {
+            yield break;
+        }
+
         yield return currentMenu.DOFade(0, .5f).SetEase(Ease.InOutQuad).WaitForCompletion();
+
+        currentMenu.gameObject.SetActive(false);
+
+        menuToOpen.gameObject.SetActive(true);
 
         yield return menuToOpen.DOFade(1, .5f).SetEase(Ease.InOutQuad).WaitForCompletion();
     }
