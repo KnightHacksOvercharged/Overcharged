@@ -50,7 +50,7 @@ namespace Assets.Database
             return user; 
         }
 
-        public static async void UpdateBestScore(int bestScore)
+        public static async Task UpdateBestScore(int bestScore)
         {
             if(CurrentUser.BestScore == -1 || bestScore < CurrentUser.BestScore)
                 CurrentUser.BestScore = bestScore;

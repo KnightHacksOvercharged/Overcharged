@@ -5,6 +5,8 @@ using TMPro;
 
 public class LeaderboardDisplay : MonoBehaviour
 {
+    [SerializeField] private RectTransform contentBox;
+
     async void Start()
     {
         var scores = await Database.GetDisplayNamesAndScoresAsync();
@@ -18,7 +20,7 @@ public class LeaderboardDisplay : MonoBehaviour
 
             HorizontalLayoutGroup layoutGroup = textObject.AddComponent<HorizontalLayoutGroup>();
             layoutGroup.childAlignment = TextAnchor.MiddleCenter;
-            layoutGroup.childForceExpandWidth = true;
+            layoutGroup.childForceExpandHeight = true;
             layoutGroup.padding = new RectOffset(30, 30, 0, 0);
 
             RectTransform rectTransform = textObject.GetComponent<RectTransform>();
@@ -48,6 +50,8 @@ public class LeaderboardDisplay : MonoBehaviour
             scoreText.color = Color.black;
             scoreText.alignment = TextAlignmentOptions.Right;
         }
+
+        RefreshUILayout.RefreshContentFitters(contentBox);
     }
 
     

@@ -76,18 +76,19 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         DeactivateAllItems();
         Cursor.lockState = CursorLockMode.None;
+        electricityBillText.color = Color.black;
         StartCoroutine(IDisplayLeaderboard());
     }
 
     private IEnumerator IDisplayLeaderboard()
     {
-        Assets.Database.Database.UpdateBestScore((int)electricityBillTotal);
+        var task = Assets.Database.Database.UpdateBestScore((int)electricityBillTotal);
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
         leaderboard.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(10);
-
-        Debug.Log("Loading Scene");
-        SceneManager.LoadScene("StartMenu");
+        yield return leaderboard.DOFade(1, .5f).SetEase(Ease.InOutQuad).WaitForCompletion();
     }
 
     private IEnumerator ITurnOnItems()

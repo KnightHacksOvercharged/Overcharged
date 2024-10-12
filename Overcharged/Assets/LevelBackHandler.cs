@@ -15,7 +15,6 @@ public class LevelBackHandler : MonoBehaviour
 
     void HandleBackButton()
     {
-        Debug.Log("Test");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");
     }
 }
